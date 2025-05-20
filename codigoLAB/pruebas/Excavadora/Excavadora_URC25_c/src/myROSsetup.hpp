@@ -136,7 +136,7 @@ void broVel(const std_msgs::UInt8& velocidad){
         excA.broc(true);
     }
 }
-void servoReco(const std_msgs::UInt8& decison){
+void servoReco(const std_msgs::Bool& decison){
     if(decison.data)
         angulo = 10;
     else
