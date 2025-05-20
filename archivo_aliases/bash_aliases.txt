@@ -1,0 +1,91 @@
+#Este archivo contiene los "alias" necesrios/utiles para el manejo del laboratorio
+#Ya sea en tu equipo, en la raspberry pi, o en la Jetson nano, NO ESTA DE MAS TENERLOS
+#******Son especialmente utiles para el laboratorio...********
+
+
+#Cada que abres una terminal tienes un archivo el cual se ejecuta automaticamente
+#(.bashrc)... este, especifca como quieres que funcione tu terminal... 
+#en ella se invoca un archivo llamado (.bash_aliases), este contine los alias que especifiques tu como usuario
+
+#un alias es como una variable, pones un nombre, lo igualas y esos entre comillas simples significa algo... ejecutable en bash...
+
+#IMPORTANTE: cada que modifiques tu archivo .bash_aliases debes aplicar un source, es decir...
+#Ya estando en el directorio del archivo, (el cual es el mismo donde se encuentra .bashrc) escribre:
+# ". .bash_aliases" el "." en el inicio es lo mismo que poner source, esto actualiza y habilita los camibios hechos.
+
+#ahora cada que uses un puerto ACM o USB y apliques ROS para el sofware del LAB pues ahorrar tiempo escribiendo solo una variable...
+#NO ES PORTABLE... pues muchos alias solo funcionan para cierto codigo de las ESP32......, este archivo NO contiene dicha info.
+#pero el git si
+
+#La ubcacion de los archivos .basrc y .bash_aliases es (cd ~/), aplica despues (ls -a) para ver los archivos .bash
+#ahi usa (sudo nano .bash_aliases) y copia las siguinetes lineas. no olvides usar (. .bash_aliases)
+#Una vez hecho puedes ejecutar (alias) para confirmar que se hayan agregado.
+
+
+
+
+
+
+
+
+
+
+# alias relacionados con 'apt'
+alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
+alias aptupdate='sudo apt update && sudo apt upgrade'
+alias aptinstall='sudo apt install'
+alias aptremove='sudo apt remove'
+alias aptclean='sudo apt autoremove && sudo apt clean'
+
+# alias relacionados con 'cd'
+alias ..='cd ..'
+alias ~='cd ~'
+
+#alias relacionados con 'git'
+alias gs='git status'
+alias ga='git add .'
+alias gc='git commit -m'
+alias gpush='git push'
+alias gpull='git pull'
+alias gpom='git push origin main'
+
+# alias relacionados con 'ls'
+alias lsACM='ls -l /dev/ttyACM*'
+alias lsUSB='ls -l /dev/ttyUSB*'
+alias lsa='ls -a'
+
+# alias relacionados con 'chmod'
+alias modACM0='sudo chmod 777 /dev/ttyACM0 && lsACM'
+alias modACM1='sudo chmod 777 /dev/ttyACM1 && lsACM'
+alias modUSB0='sudo chmod 777 /dev/ttyUSB0'
+alias modUSB1='sudo chmod 777 /dev/ttyUSB1'
+alias chmodx='chmod +x'
+
+
+#relacionados con ROS y la maquina de estados...
+
+alias rosrunACM0='rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0'
+alias DBRO='rostopic pub /Dbro std_msgs/Bool'
+alias DGUS='rostopic pub /Dgus std_msgs/Bool'
+alias stop='rostopic pub /STOP std_msgs/Bool 1'
+alias velG='rostopic pub /setGvel std_msgs/UInt8'
+alias velB='rostopic pub /setBvel std_msgs/UInt8'
+
+#alias para los nema del 1 al 6
+alias nm1r='rostopic pub /nema1R std_msgs/UInt16'
+alias nm1l='rostopic pub /nema1L std_msgs/UInt16'
+
+alias nm2r='rostopic pub /nema2R std_msgs/UInt16'
+alias nm2l='rostopic pub /nema2L std_msgs/UInt16'
+
+alias nm3r='rostopic pub /nema3R std_msgs/UInt16'
+alias nm3l='rostopic pub /nema3L std_msgs/UInt16'
+
+alias nm4r='rostopic pub /nema4R std_msgs/UInt16'
+alias nm4l='rostopic pub /nema4L std_msgs/UInt16'
+
+alias nm5r='rostopic pub /nema5R std_msgs/UInt16'
+alias nm5l='rostopic pub /nema5L std_msgs/UInt16'
+
+alias nm6r='rostopic pub /nema6R std_msgs/UInt16'
+alias nm6l='rostopic pub /nema6L std_msgs/UInt16'
