@@ -104,7 +104,7 @@ void nema5R(const std_msgs::UInt16& pasos){
     mtr5.nemaMoveMicro(pasos.data, true, myDelay);
 }
 void nema5L(const std_msgs::UInt16& pasos){
-    mtr5.nemaMoveMicro(pasos.data, false, myDelay);
+    mtr5.nemaMoveMili(pasos.data, false, 5);
 }
 void nema6R(const std_msgs::UInt16& pasos){
     mtr6.nemaMoveMicro(pasos.data, true, myDelay);
