@@ -1,0 +1,39 @@
+Proceso del lab - Rutina URC2025 duración aprox 25min
+	PASOS
+0- 
+En un inicio el LAB debe tener todos sus motores en el estado 0
+	"Hace falta definir cuales son los estados 0"
+	"¿Cuantos limitSwitch necesitamos?"
+
+1-	
+INICIO -> Activar sensores de Gas mientras el rover avanza...
+	  estaran en funcionamiento X [min]
+  ¿Cuál es el proceso una vez el rover este en el lugar indicado?
+
+2- 
+Iniciar proceso de excavación 10 [cm], Gusano, Broca, Colector
+	2.1 Baja Modulo eje Z, NEMA, hasta presionar LimitSwitch
+		"¿Se necesita otro para subida?..."
+	2.2 Rutina Gusano y Broca
+	       Gusano baja, hasta rozar el suelo (std_msgs/Bool 1)
+	       Broca comineza a girar MAX (std_msgs/UInt 126)
+	         - Repetir las sig lineas hasta hundirse 10cm
+	           { mtr Gusano
+	             - enterrar 3 a 5 [cm] (std_msgs/Bool 1)
+	             - sacar 1 a 2 [cm] (std_msgs/Bool 0)
+	             	cada que saca Broca baja vel (std_msgs/UInt 80)
+	             	al enterrar Broca vuelve al MAXIMO
+	           {
+	           ***IMPORTANTE***
+	           ¿Como sabemos cuando se enterro el gusano por completo?...
+	2.3 Colector   <-Baja y sube junto con el gusano->
+	*** LimitSwitch exca ***
+	indica cuando se enterro por completo "BROCA MAX (std_msgs/UInt 126)"
+		- Broca sigue girando hasta colectar la cantidad 
+	  	  de tierra requerrida en el colector 
+	2.4 Dispensación  
+		- Sube Gusano (ya esta cargado el colector)
+		- 
+            
+
+FIN -> Uso del Espectrofotometro

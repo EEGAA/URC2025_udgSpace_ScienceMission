@@ -59,6 +59,14 @@ void loop(){
       angulo = 180;
       miServo.write(angulo);
       Serial.println(angulo);
+    case 'c':
+      angulo = 120;
+      miServo.write(angulo);
+      Serial.println(angulo);
+    case 'd':
+      angulo = 10;
+      miServo.write(angulo);
+      Serial.println(angulo);
       break;
     default:
       break;

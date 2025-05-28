@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#define pinSWopen 8
+#define pinSWopen 41
 //#define pinSWclose 3
 
 void setup(){
