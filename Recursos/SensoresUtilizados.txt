@@ -4,8 +4,8 @@
 *** ESP32 externa ***s
 
 	- Roboclaw Gusano y broca
-	  - PinesESP = {39, 40}
-	    - En la robo, 40 a S1, 39 a S2
+	  - PinesESP = {19, 20}
+	    - En la robo, 20 a S1, 19 a S2
 	    - NO olvidar enchufar GND
 	    
 	- Servo Colector
@@ -15,6 +15,6 @@
 	Con la antena arriba: IZQUIERDA
 	12, 13
 	con la antena arriba: DERECHA
-	1, 2, 42, 41, 39, 38, 37, 36, 35, 0, 45, 48, 47, 21, 20, 19
-	Estos de la derecha son 16 libres, aqui van los limitSwitch
+	41, 40, 39, 38, 37, 36, 35, 0, 45, 48, 47, 21, 20, 19
+	Estos pines libres son 16, aqui van los limitSwitch
 	Tu define como quieres enchifarlos cualquiera de estos sirven....

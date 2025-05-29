@@ -287,20 +287,58 @@ void rosLoop(){
             excavState = CYCLE_GUSANO;
         }
         break;
-    case CYCLE_GUSANO:
+    /*case CYCLE_GUSANO:
         if (cycleCount < 31) {
-            if (millis() - lastActionTime >= 1300) {
-                excA.gusa(bndDIR);  // Alterna dirección
+            if (!bndDIR && (millis() - lastActionTime >= 2000)) {
+                excA.gusa(false);  // Alterna dirección
                 lastActionTime = millis();
-                cycleCount++;
-                bndDIR = !bndDIR;
+                bndDIR = true;
+            }else if(bndDIR){
+                excA.gusa(true);
+                if(digitalRead(pinLimitGusano)){
+                    excA.stopGus();
+                    //lastActionTime = millis();
+                    bndDIR = false;
+                }
             }
+            cycleCount++;
         } else {
             excA.stopGus();
             lastActionTime = millis();
             excavState = FINISH;
         }
+        break;*/
+    case CYCLE_GUSANO: {
+        static bool waitingForRise = false;  // Bandera para controlar la subida
+        static unsigned long riseStartTime = 0;
+
+        if (cycleCount < 15) {
+            if (!waitingForRise) {
+                // --- Fase de Bajada ---
+                excA.gusa(true);  // Motor baja
+                if (digitalRead(pinLimitGusano) == HIGH) {  // Si se presiona el limitSwitch (asumo LOW=presionado)
+                    excA.gusa(false);  // Cambia a subir
+                    waitingForRise = true;
+                    riseStartTime = millis();  // Inicia temporizador de subida
+                    cycleCount++;  // Incrementa el contador de ciclos
+                    
+                    // Debug opcional
+                    node.loginfo(("Ciclo " + String(cycleCount) + ": LimitSwitch presionado, subiendo...").c_str());
+                }
+            } else {
+                // --- Fase de Subida (2 segundos) ---
+                if (millis() - riseStartTime >= 1000) {  // Espera 2 segundos
+                    waitingForRise = false;  // Vuelve a bajar en el próximo ciclo
+                }
+            }
+        } else {
+            // --- Fin del proceso ---
+            excA.stopGus();
+            excavState = FINISH;
+            node.loginfo("Ciclos completados (15/15)");
+        }
         break;
+}
     case FINISH:
         if (millis() - lastActionTime >= 15000) {
             excA.stopBro();
